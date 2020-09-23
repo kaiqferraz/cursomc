@@ -1,5 +1,6 @@
 package com.kaiqueferraz.cursomc.services;
 
+import com.kaiqueferraz.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +16,14 @@ public class CategoriaService {
 	private CategoriaRepository repo;
 
 	//chamar objeto por id
+
+
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
-		}
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+	}
 
-		//se objeto for encontrado, ele é instanciado e retorna obj
-	    //se nao retorna nulo
 
 	
 }
