@@ -1,7 +1,7 @@
 package com.kaiqueferraz.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kaiqueferraz.cursomc.domain.enums.TipoCliente;
 
 import javax.persistence.*;
@@ -24,7 +24,7 @@ public class Cliente implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo;
 
-  @JsonManagedReference //Liberar Serialização para endereço
+
   @OneToMany(mappedBy = "cliente")
   private List<Endereco> enderecos = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class Cliente implements Serializable {
   @CollectionTable(name="TELEFONE")
   private Set<String> telefones = new HashSet<>(); //Coleção de Strings não aceita repetição
 
-  @JsonBackReference   //Bloquear Serialização para  pedido
+  @JsonIgnore   //Bloquear Serialização para  pedido
   @OneToMany(mappedBy = "cliente")
   private List<Pedido> pedidos = new ArrayList<>(); //CLIENTE TEM 1 LISTA DE PEDIDOS
 

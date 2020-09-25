@@ -1,7 +1,7 @@
 package com.kaiqueferraz.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,11 +21,11 @@ public class Pedido implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date instance;
 
-    @JsonManagedReference //Liberar Serialização para  pagamento
+
     @OneToOne(cascade=CascadeType.ALL, mappedBy="pedido") //NECESSARIO P/ NAO DA ERRO NO JPA
     private Pagamento pagamento; //PEDIDO TEM 1 PAGAMENTO
 
-    @JsonManagedReference //Liberar Serialização para  cliente
+
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;  //PEDIDO TEM 1 CLIENTE
