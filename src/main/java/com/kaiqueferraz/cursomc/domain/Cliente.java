@@ -31,6 +31,10 @@ public class Cliente implements Serializable {
   @CollectionTable(name="TELEFONE")
   private Set<String> telefones = new HashSet<>(); //Coleção de Strings não aceita repetição
 
+  @OneToMany(mappedBy = "cliente")
+  private List<Pedido> pedidos = new ArrayList<>(); //CLIENTE TEM 1 LISTA DE PEDIDOS
+
+
     public Cliente() {
     }
 
@@ -97,6 +101,14 @@ public class Cliente implements Serializable {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
