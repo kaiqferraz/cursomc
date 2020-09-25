@@ -1,5 +1,6 @@
 package com.kaiqueferraz.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.kaiqueferraz.cursomc.domain.enums.EstadoPagamento;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
+    @JsonBackReference //Bloquear Serialização para  pedido
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId  //PAGAMENTO TEM O MESMO ID QUE O PEDIDO

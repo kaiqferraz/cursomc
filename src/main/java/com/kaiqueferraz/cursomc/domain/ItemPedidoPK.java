@@ -6,6 +6,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
+
 @Embeddable // Classe Subtipo
 public class ItemPedidoPK implements Serializable {
 
