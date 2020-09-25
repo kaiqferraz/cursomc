@@ -3,6 +3,8 @@ package com.kaiqueferraz.cursomc.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Pedido implements Serializable {
@@ -24,6 +26,11 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn (name="enderecoDeEntrega_id") //CHAVE ESTRANGEIRA
     private Endereco enderecoDeEntrega;  //PEDIDO TEM 1 ENDEREÇO
+
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>(); //PEDIDO TEM UMA COLEÇÃO DE ITENS
+
+
 
     public Pedido() {
     }
@@ -73,6 +80,14 @@ public class Pedido implements Serializable {
 
     public void setEnderecoDeEntrega(Endereco enderecoDeEntrega) {
         this.enderecoDeEntrega = enderecoDeEntrega;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     @Override
