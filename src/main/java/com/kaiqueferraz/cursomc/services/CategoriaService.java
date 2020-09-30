@@ -18,7 +18,7 @@ public class CategoriaService {
 	//chamar objeto por id
 
 
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
@@ -30,6 +30,11 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 
+
+	public Categoria update(Categoria obj) {
+		find(obj.getId()); // BUSCA O OBJ NO BANCO, CASO NAO EXISTA TEM UMA EXCEPTION
+		return repo.save(obj);
+	}
 
 	
 }
