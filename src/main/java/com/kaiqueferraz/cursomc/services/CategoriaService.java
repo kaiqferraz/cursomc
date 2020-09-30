@@ -1,7 +1,9 @@
 package com.kaiqueferraz.cursomc.services;
 
+import com.kaiqueferraz.cursomc.services.exceptions.DataIntegrityException;
 import com.kaiqueferraz.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.kaiqueferraz.cursomc.domain.Categoria;
@@ -35,6 +37,20 @@ public class CategoriaService {
 		find(obj.getId()); // BUSCA O OBJ NO BANCO, CASO NAO EXISTA TEM UMA EXCEPTION
 		return repo.save(obj);
 	}
+
+
+	public void delete(Integer id){
+		find(id);
+		try{
+			repo.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e){
+           throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
+		}
+
+	}
+
+
 
 	
 }
