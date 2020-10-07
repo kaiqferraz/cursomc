@@ -1,5 +1,6 @@
 package com.kaiqueferraz.cursomc.services;
 
+import com.kaiqueferraz.cursomc.dto.CategoriaDTO;
 import com.kaiqueferraz.cursomc.services.exceptions.DataIntegrityException;
 import com.kaiqueferraz.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,10 @@ public class CategoriaService {
 	 return repo.findAll(pageRequest);
 	}
 
+
+	public Categoria fromDTO(CategoriaDTO objDto){
+		return new Categoria(objDto.getId(), objDto.getNome());
+	}
 
 	
 }
